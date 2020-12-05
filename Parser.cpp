@@ -17,12 +17,11 @@ using istream;
 using istream_iterator;
 using stringstream;
 
-int main(){
+void readData(TwitterGraph& g){
     ifstream file("twitter_combined.txt");
     string line;
     string firstId;
     string seconId;
-
     if (file.is_open()){
         while ( getLine(file,line) ){
 
@@ -33,9 +32,9 @@ int main(){
             //Now turning strings into unsigned long and creating User objects
             unsigned long idOne = stoul(firstId, nullptr, 0);
             unsigned long idTwo = stoul(seconId, nullptr, 0);
-            addUser(idOne);
-            addUser(idTwo);
-            addConnection(idOne, idTwo);
+            g.addUser(idOne);
+            g.addUser(idTwo);
+            g.addConnection(idOne, idTwo);
         }
     }
 }

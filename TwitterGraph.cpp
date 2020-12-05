@@ -41,3 +41,56 @@ std::vector<unsigned long> TwitterGraph::connections(unsigned long n){
 bool TwitterGraph::isFollowing(unsigned long n1, unsigned long n2){
     return users.find(n1) != users.end() && (users[n1]->adjList).find(n2) != (users[n1]->adjList).end();    //checks if connection exists
 }
+
+bool TwitterGraph::isUser(unsigned long n){
+    return users.find(n) != users.end();
+}
+
+std::vector<std::vector<unsigned long>> TwitterGraph::BFS(){
+    std::vector<std::vector<unsigned long>> traversals;
+    for(auto it = users.begin(); it!=users.end(); it++){
+        it->second->l = UNEXPLORED;
+        for(auto itt = it->second->adjList.begin(); itt != it->second->adjList.end(); itt++){
+            itt->second->l = UNEXPLORED;
+        }
+    }
+    for(auto it = users.begin(); it!=users.end(); it++){
+        if(it->second->l == UNEXPLORED){
+            traversals.push_back(BFS(it->first));
+        }
+    }
+    return traversals;
+}
+
+std::vector<unsigned long> TwitterGraph::BFS(unsigned long n){
+    std::vector<unsigned long> nodes;
+    std::queue<unsigned long> q;
+    q.push(n);
+    users[n]->l = VISITED;
+    unsigned long temp;
+    while(!q.empty()){
+        temp = q.front();
+        q.pop();
+        nodes.push_back(temp);
+        for(unsigned long& c: connections(temp)){
+            if(users[c]->l == UNEXPLORED){
+                q.push(c);
+                users[c]->l = VISITED;
+                users[temp] -> adjList[c]->l = DISCOVERY;
+            }
+            else if(users[temp] -> adjList[c]->l == UNEXPLORED)
+                users[temp] -> adjList[c]->l = CROSS;
+        }
+    }
+    return nodes;
+}
+
+TwitterGraph::~TwitterGraph(){
+    for(auto it = users.begin(); it!=users.end(); it++){
+        User*& u = it->second;
+        for(auto itt = u->adjList.begin(); itt!= u->adjList.end(); itt++){
+            delete itt->second;
+        }
+        delete u;
+    }
+}
