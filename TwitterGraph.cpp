@@ -94,3 +94,9 @@ TwitterGraph::~TwitterGraph(){
         delete u;
     }
 }
+
+TwitterGraph::betweenessCentral() {
+  for (auto it = users.begin(); it != users.end(); ++it) {
+    (it->second)->betweenessCentralValue = 0 //set betweeness central values here
+  }
+}
