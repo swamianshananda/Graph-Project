@@ -1,10 +1,10 @@
 #pragma once
-#include <iosstream>
 #include "TwitterGraph.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
-class Parser {
-  private:
-    
-  public:
-    void readData(TwitterGraph& g, string filename);
-};
+
+void readData(TwitterGraph& g, std::string filename);
+
+void outputBFS(TwitterGraph& g, std::string filename);
