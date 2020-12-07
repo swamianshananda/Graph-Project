@@ -4,7 +4,7 @@
 #include <string>
 #include <queue>
 class TwitterGraph{ //graph to use to map Twitter Users
-    private:
+    public:
         enum Label {VISITED, UNEXPLORED, DISCOVERY, CROSS};
         struct Connection{  //essentially an edge
             const unsigned long source; //the person who is the follower
@@ -23,7 +23,6 @@ class TwitterGraph{ //graph to use to map Twitter Users
         std::unordered_map<unsigned long, User*> users; //hash table to determine nodeId to actual users.
 
         std::vector<unsigned long> BFS(unsigned long);
-    public:
         void addUser(unsigned long);    //adds user to graph
         void removeUser(unsigned long); //removers user from graph.
         void addConnection(unsigned long, unsigned long);   //add connection where first person follows another person

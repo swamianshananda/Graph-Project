@@ -1,5 +1,5 @@
 EXENAME = project
-OBJS = TwitterGraph.o Parser.o main.cpp
+OBJS = TwitterGraph.o Parser.o floyd-warshall.o main.cpp
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -38,6 +38,8 @@ TwitterGraph.o : TwitterGraph.h TwitterGraph.cpp
 Parser.o: Parser.h Parser.cpp
 	$(CXX) $(CXXFLAGS) Parser.cpp
 
+floyd-warshall.o: floyd-warshall.h floyd-warshall.cpp
+	$(CXX) $(CXXFLAGS) floyd-warshall.cpp
 
 clean :
 	-rm -f *.o $(EXENAME) test
