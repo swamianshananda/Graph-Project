@@ -13,6 +13,7 @@ void readData(TwitterGraph& g, string filename){
     string line;
     string firstId;
     string secondId;
+
     if (file.is_open()){
         while (getline(file,line) ){
             int space = line.find(" ");
