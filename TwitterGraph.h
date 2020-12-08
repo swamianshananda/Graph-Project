@@ -12,13 +12,14 @@ class TwitterGraph{ //graph to use to map Twitter Users
             Label l;
             Connection(unsigned long s, unsigned long d) : source(s), destination(d), l(UNEXPLORED){};  //Constructor
         };
-
+        
         struct User{    //essentially a vertex
             const unsigned long userId; //to represent the nodeId used in the files.
             std::unordered_map<unsigned long, Connection*> adjList; //used a hashtable to determine all the people a user follows
             Label l;
-            User(unsigned long id) : userId(id), l(UNEXPLORED){};  //constructs user based on nodeId
             float betweenessCentralValue; //betweeness centriality value
+            User(unsigned long id) : userId(id), l(UNEXPLORED), betweenessCentralValue(0.0){};  //constructs user based on nodeId
+            
         };
         std::unordered_map<unsigned long, User*> users; //hash table to determine nodeId to actual users.
 
@@ -32,5 +33,4 @@ class TwitterGraph{ //graph to use to map Twitter Users
         bool isUser(unsigned long);
         std::vector<std::vector<unsigned long>> BFS();
         ~TwitterGraph();
-        void betweenessCentral(); 
 };
