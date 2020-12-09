@@ -10,3 +10,5 @@ void betweenessCentral(TwitterGraph &g, int** distanceArray);
 int findLargestNumber(int* source);
 
 void recursiveBetweenVal(int source, int current, int distance[], float (&betweenessCentralValues)[]);
+
+void betweenessCentral(TwitterGraph &g);

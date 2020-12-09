@@ -113,7 +113,7 @@ void recursiveBetweenVal(int source, int current, int distance[], float &between
 
 
 
-void newBetweenness(TwitterGraph &g) {
+void betweenessCentral(TwitterGraph &g) {
   for (auto sourceNode : g.users) {
     for (auto destinationNode : g.users) {
       if (sourceNode->first != destinationNode->first) {

@@ -119,3 +119,26 @@ TEST_CASE("Check if the Floyd-Warshall Algorithm Works"){
     REQUIRE(g.findDistance(5,4) == 1);
     REQUIRE(g.findDistance(5,2) == 2);
 }
+
+TEST_CASE("Check if the Betweeness Centriality Algorithm Works") {
+  TwitterGraph g;
+  for(int i = 1; i<6; i++){
+    g.addUser(i);
+  }
+  g.addConnection(1,2);
+  g.addConnection(2,3);
+  g.addConnection(2,4);
+  g.addConnection(4,5);
+  g.betweenessCentral(g);
+  REQUIRE(g.users[1]->betweenessCentralValue == 4);
+  REQUIRE(g.users[2]->betweenessCentralValue == 14);
+  REQUIRE(g.users[3]->betweenessCentralValue == 4);
+  REQUIRE(g.users[4]->betweenessCentralValue == 10);
+  REQUIRE(g.users[5]->betweenessCentralValue == 4);
+  g.addConnection(2,5);
+  REQUIRE(g.users[1]->betweenessCentralValue == 4);
+  REQUIRE(g.users[2]->betweenessCentralValue == 14);
+  REQUIRE(g.users[3]->betweenessCentralValue == 4);
+  REQUIRE(g.users[4]->betweenessCentralValue == 4);
+  REQUIRE(g.users[5]->betweenessCentralValue == 4);
+}
