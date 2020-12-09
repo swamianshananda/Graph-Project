@@ -6,6 +6,8 @@
 #include <queue>
 #include <stack>
 
+#define INF 9001
+
 using namespace std;
 
 void betweenessCentral(TwitterGraph &g) {
@@ -107,3 +109,31 @@ void recursiveBetweenVal(int source, int current, int distance[], float &between
   }
 }
 */
+
+
+
+
+void newBetweenness(TwitterGraph &g) {
+  for (auto sourceNode : g.users) {
+    for (auto destinationNode : g.users) {
+      if (sourceNode->first != destinationNode->first) {
+        vector<unsigned long> path = g.shortestPath(sourceNode->first, destinationNode->first);
+        if (path[0] != INF) {
+          for (auto nodeID : path) {
+            if (nodeID != sourceNode->first) {
+              g.users[nodeID]->betweenessCentralValue += 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
