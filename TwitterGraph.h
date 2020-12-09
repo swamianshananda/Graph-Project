@@ -22,8 +22,9 @@ class TwitterGraph{ //graph to use to map Twitter Users
             
         };
         std::unordered_map<unsigned long, User*> users; //hash table to determine nodeId to actual users.
-
-        std::vector<unsigned long> BFS(unsigned long);
+        std::unordered_map<unsigned long, int> indices;
+        std::vector<std::vector<int>> distMatrix;
+        
         void addUser(unsigned long);    //adds user to graph
         void removeUser(unsigned long); //removers user from graph.
         void addConnection(unsigned long, unsigned long);   //add connection where first person follows another person
@@ -31,6 +32,10 @@ class TwitterGraph{ //graph to use to map Twitter Users
         std::vector<unsigned long> connections(unsigned long);  //returns nodeIds of all people a person is following
         bool isFollowing(unsigned long, unsigned long); //determines if the first person is following another person
         bool isUser(unsigned long);
+        std::vector<unsigned long> BFS(unsigned long);
         std::vector<std::vector<unsigned long>> BFS();
+        void createIndexes();
+        void calculateDistances();
+        int findDistance(unsigned long, unsigned long);
         ~TwitterGraph();
 };
