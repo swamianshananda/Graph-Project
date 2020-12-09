@@ -1,4 +1,4 @@
 #pragma once
 #include "TwitterGraph.h"
 
-int** flyods(TwitterGraph&);
+int** floyds(TwitterGraph&);

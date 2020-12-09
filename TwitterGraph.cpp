@@ -1,10 +1,10 @@
 #include "TwitterGraph.h"
 
 void TwitterGraph::addUser(unsigned long n){
-    if(users.find(n) == users.end())    //check is user in the hash table
+    if(users.find(n) == users.end())   //check is user in the hash table 
         users[n] = new User(n); //if not, create a new user and add it to the hash table
+    
 }
-
 void TwitterGraph::removeUser(unsigned long n){
     if(users.find(n) != users.end()){   //check if the person is in the hash table
         for(auto it = (users[n]->adjList).begin(); it != (users[n]->adjList).end(); ++it){  //for every connection a person has

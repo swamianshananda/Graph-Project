@@ -41,5 +41,8 @@ Parser.o: Parser.h Parser.cpp
 floyd-warshall.o: floyd-warshall.h floyd-warshall.cpp
 	$(CXX) $(CXXFLAGS) floyd-warshall.cpp
 
+BetweenessCentral.o: BetweenessCentral.h BetweenessCentral.cpp
+	$(CXX) $(CXXFLAGS) BetweenessCentral.cpp
+
 clean :
 	-rm -f *.o $(EXENAME) test
