@@ -1,18 +1,18 @@
 #include "TwitterGraph.h"
 
 void TwitterGraph::addUser(unsigned long n){
-<<<<<<< HEAD
+
     if(users.find(n) == users.end())   //check is user in the hash table 
         users[n] = new User(n); //if not, create a new user and add it to the hash table
     
-=======
+
     if(users.find(n) == users.end()){
         int x = users.size();
         indices[n] = x;
         users[n] = new User(n);
     }   //check is user in the hash table
          //if not, create a new user and add it to the hash table
->>>>>>> d45d3419992e032e1e3b237113c06340d3d03e52
+
 }
 void TwitterGraph::removeUser(unsigned long n){
     if(users.find(n) != users.end()){   //check if the person is in the hash table

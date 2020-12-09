@@ -41,10 +41,10 @@ Parser.o: Parser.h Parser.cpp
 floyd-warshall.o: floyd-warshall.h floyd-warshall.cpp
 	$(CXX) $(CXXFLAGS) floyd-warshall.cpp
 
-<<<<<<< HEAD
+
 BetweenessCentral.o: BetweenessCentral.h BetweenessCentral.cpp
 	$(CXX) $(CXXFLAGS) BetweenessCentral.cpp
-=======
+
 test: output_msg tests.o TwitterGraph.o Parser.o floyd-warshall.o
 	$(LD) tests.o TwitterGraph.o Parser.o floyd-warshall.o $(LDFLAGS) -o test
 
@@ -52,7 +52,7 @@ tests.o : tests/tests.cpp catch/catch.hpp
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
 
 .PHONY: all test clean output_msg
->>>>>>> d45d3419992e032e1e3b237113c06340d3d03e52
+
 
 clean :
 	-rm -f *.o $(EXENAME) test
