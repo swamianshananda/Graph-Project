@@ -7,8 +7,8 @@ int main(){
     TwitterGraph g;
     readData(g,"twitter_combined.txt"); //reads data
     //betweenessCentral(g, floyds(g)); //calls Between centriality which needs input of Floyd-Warshall
-    //outputBFS(g,"BFS.txt"); 
-    std::cout << floyds(g);
+    outputBFS(g,"BFS.txt"); 
+    //std::cout << floyds(g);
     
     /*
     int edges = 0;

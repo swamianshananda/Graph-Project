@@ -4,21 +4,26 @@
 #include <unordered_map>
 #include <string>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
-void betweenessCentral(TwitterGraph &g, int** distanceArray) {
-  /*
+void betweenessCentral(TwitterGraph &g) {
+  
   stack<int> S;
   queue<int> Q;
-  vector<int> d;
+  
+  vector<int> pred;
+  vector<int> sigma;
+  vector<int> delta;
+  
   for (auto it = g.users.begin(); it != g.users.end(); ++it) {
     
-    unordered_map<int, unsigned long> P;
-    vector<int> sigma;
+    int dist[g.users.size()];
     
     
     
+    /*
     //enqueue s into Q
     
     while(!Q.empty()) {
@@ -48,10 +53,12 @@ void betweenessCentral(TwitterGraph &g, int** distanceArray) {
       S.pop();
       for 
     }
+     */
     
   }
-  */
-  
+     
+}  
+  /*
   float betweenessCentralValues [users.size()] = { }; // initialize array of all betweeness values to 0
   for(auto sourceNode : g.users) {
     int* sourceDistances = distanceArray[sourceNode]; //grab all relative distances from source node
@@ -71,8 +78,10 @@ void betweenessCentral(TwitterGraph &g, int** distanceArray) {
     node->second.betweenessCentralValue = betweenessCentralValues[count];
     count++;
   }
+  /*
 }
 
+/*
 int findLargestNumber(int* source) {
   int returnIndex = 0;
   for (int i = 1; i < source.size()-1; i++) {
@@ -97,3 +106,4 @@ void recursiveBetweenVal(int source, int current, int distance[], float &between
     }
   }
 }
+*/

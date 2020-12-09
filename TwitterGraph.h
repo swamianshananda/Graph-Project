@@ -22,7 +22,7 @@ class TwitterGraph{ //graph to use to map Twitter Users
             
         };
         std::unordered_map<unsigned long, User*> users; //hash table to determine nodeId to actual users.
-        std::unordered_map<unsigned long, int> indices;
+        std::unordered_map<int, unsigned long> indices;
         std::vector<std::vector<int>> distMatrix;
         
         void addUser(unsigned long);    //adds user to graph

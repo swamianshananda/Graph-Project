@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include <queue>
+#include "TwitterGraph.h"
 
 void betweenessCentral(TwitterGraph &g, int** distanceArray);
 
