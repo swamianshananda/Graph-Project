@@ -9,6 +9,7 @@ void TwitterGraph::addUser(unsigned long n){
     if(users.find(n) == users.end()){
         int x = users.size();
         indices[x] = n;
+        //indicesReversed[n] = x;
         users[n] = new User(n);
     }   //check is user in the hash table
          //if not, create a new user and add it to the hash table
@@ -22,7 +23,9 @@ void TwitterGraph::removeUser(unsigned long n){
         delete users[n];    //delete the user
         users.erase(n); //erase the key from the hash table.
         createIndexes();
+        //createIndexesReversed();
     }
+    
 }
 
 void TwitterGraph::addConnection(unsigned long s, unsigned long d){
@@ -103,7 +106,16 @@ void TwitterGraph::createIndexes(){
         v++;
     }
 }
-
+/*
+void TwitterGraph::createIndexesReversed(){
+  int v = 0;
+  indicesReversed.erase(indicesReversed.begin(),indicesReversed.end());
+  for(auto it = users.begin(); it!=users.end(); it++){
+    indicesReversed[it->first] = v;
+    v++;
+  }
+}
+*/
 void TwitterGraph::calculateDistances(){
     unsigned v = users.size();
     unsigned x = 0;
