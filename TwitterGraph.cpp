@@ -1,9 +1,18 @@
 #include "TwitterGraph.h"
 
 void TwitterGraph::addUser(unsigned long n){
+<<<<<<< HEAD
     if(users.find(n) == users.end())   //check is user in the hash table 
         users[n] = new User(n); //if not, create a new user and add it to the hash table
     
+=======
+    if(users.find(n) == users.end()){
+        int x = users.size();
+        indices[n] = x;
+        users[n] = new User(n);
+    }   //check is user in the hash table
+         //if not, create a new user and add it to the hash table
+>>>>>>> d45d3419992e032e1e3b237113c06340d3d03e52
 }
 void TwitterGraph::removeUser(unsigned long n){
     if(users.find(n) != users.end()){   //check if the person is in the hash table
@@ -12,6 +21,7 @@ void TwitterGraph::removeUser(unsigned long n){
         }
         delete users[n];    //delete the user
         users.erase(n); //erase the key from the hash table.
+        createIndexes();
     }
 }
 
@@ -83,6 +93,60 @@ std::vector<unsigned long> TwitterGraph::BFS(unsigned long n){
         }
     }
     return nodes;
+}
+
+void TwitterGraph::createIndexes(){
+    int v = 0;
+    indices.erase(indices.begin(),indices.end());
+    for(auto it = users.begin(); it!=users.end(); it++){
+        indices[it->first] = v;
+        v++;
+    }
+}
+
+void TwitterGraph::calculateDistances(){
+    unsigned v = users.size();
+    unsigned x = 0;
+    unsigned y = 0;
+    distMatrix.resize(v);
+    for(std::vector<int>& n : distMatrix){
+        n.resize(v);
+    }
+    for(auto it = users.begin(); it!= users.end(); ++it){
+        for(auto it2 = users.begin(); it2 != users.end(); ++it2){
+            x = indices[it->first];
+            y = indices[it2->first];
+            if(x == y){
+                distMatrix[x][y] = 0;
+            }
+            else if(isFollowing(it->first, it2->first)){
+                distMatrix[x][y] = 1;
+            }
+            else{
+                distMatrix[x][y] = INT_MAX;
+            }
+        }
+    }
+
+    for(unsigned k = 0; k<v; k++){
+        for(unsigned x = 0; x<v; x++){
+            if(distMatrix[x][k] == INT_MAX)
+                continue;
+            for(unsigned y = 0; y<v; y++){
+                if(distMatrix[k][y] == INT_MAX)
+                    continue;
+                if(distMatrix[x][y] > (distMatrix[x][k]+distMatrix[k][y]))
+                    distMatrix[x][y] = distMatrix[x][k] + distMatrix[k][y];
+            }
+        }
+    }
+}
+
+int TwitterGraph::findDistance(unsigned long n1, unsigned long n2){
+    int d = distMatrix[indices[n1]][indices[n2]];
+    if(d == INT_MAX)
+        return -1;
+    return d;
 }
 
 TwitterGraph::~TwitterGraph(){
