@@ -29,6 +29,7 @@ HERE IS A LINK TO OUR DATASET *: http://snap.stanford.edu/data/ego-Twitter.html<
 We have provided test cases. Once downloaded please run "make test" then "./test" this will show you how our test cases work. Afterwards if you want to run the program fully run "make" then "./project". This is our executable where it runs the whole program and displays the BFS output in the file "BFS.txt". It also runs the Floyd-Warshall and Betweeness Centriality and will print out the the distances between each node in "distances.txt" and the betweeness centriality values in "centrality.txt".
 
 <br />
+<br />
 
 We calculated the betweeness centriality values as following: we declare one node as a source, then we find the shortest path to every other node in the dataset. For each path, every node that is in the path will increment their betweeness centriality score by 1. Then we repeat this process by making every node in the data set a source node. If two node have no connection/path than the betweeness centriality doesn't increment. This leads us to be the more connections a node has, meaning it is more central like a "hub" the higher the betweeness centriality score will be. This concept was given to us by a TA.
 
