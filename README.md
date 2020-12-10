@@ -26,7 +26,7 @@ _HERE IS A LINK TO OUR DATASET_: http://snap.stanford.edu/data/ego-Twitter.html<
 
 <br />
 <br />
-We have provided test cases. Once downloaded please run "make test" then "./test" this will show you how our test cases work. Afterwards if you want to run the program fully run "make" then "./project". This is our executable where it runs the whole program and displays the BFS output in the file BFS.txt. It also runs the Floyd-Warshall and Betweeness Centriality and will print out the the distances between each node in distances.txt and the betweeness centriality values in centrality.txt
+We have provided test cases. Once downloaded please run "make test" then "./test" this will show you how our test cases work. Afterwards if you want to run the program fully run "make" then "./project". This is our executable where it runs the whole program and displays the BFS output in the file _BFS.txt_. It also runs the Floyd-Warshall and Betweeness Centriality and will print out the the distances between each node in _distances.txt_ and the betweeness centriality values in _centrality.txt_.
 
 <br />
 
