@@ -27,7 +27,7 @@ We have provided test cases. Once downloaded please run "make test" then "./test
 We calculated the betweeness centriality values as following: we declare one node as a source, then we find the shortest path to every other node in the dataset. For each path, every node that is in the path will increment their betweeness centriality score by 1. Then we repeat this process by making every node in the data set a source node. If two node have no connection/path than the betweeness centriality doesn't increment. This leads us to be the more connections a node has, meaning it is more central like a "hub" the higher the betweeness centriality score will be. This concept was given to us by a TA.
 
 
-#**General Commands**
+#(**General Commands**)
 
 **git pull** = pull the git repository
 
