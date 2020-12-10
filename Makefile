@@ -1,5 +1,5 @@
 EXENAME = project
-OBJS = TwitterGraph.o Parser.o floyd-warshall.o BetweenessCentral.o main.cpp
+OBJS = TwitterGraph.o Parser.o main.cpp
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -38,12 +38,6 @@ TwitterGraph.o : TwitterGraph.h TwitterGraph.cpp
 Parser.o: Parser.h Parser.cpp
 	$(CXX) $(CXXFLAGS) Parser.cpp
 
-floyd-warshall.o: floyd-warshall.h floyd-warshall.cpp
-	$(CXX) $(CXXFLAGS) floyd-warshall.cpp
-
-
-BetweenessCentral.o: BetweenessCentral.h BetweenessCentral.cpp
-	$(CXX) $(CXXFLAGS) BetweenessCentral.cpp
 
 test: output_msg tests.o TwitterGraph.o Parser.o floyd-warshall.o
 	$(LD) tests.o TwitterGraph.o Parser.o floyd-warshall.o $(LDFLAGS) -o test

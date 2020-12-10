@@ -37,7 +37,6 @@ class TwitterGraph{ //graph to use to map Twitter Users
         std::vector<unsigned long> BFS(unsigned long);
         std::vector<std::vector<unsigned long>> BFS();
         void createIndexes();
-        void createIndexesReversed();
         void calculateDistances();
         int findDistance(unsigned long, unsigned long);
         void calculateCentrality();

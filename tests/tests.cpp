@@ -2,7 +2,6 @@
 #include "../catch/catch.hpp"
 #include "../TwitterGraph.h"
 #include "../Parser.h"
-#include "../floyd-warshall.h"
 
 TEST_CASE("Graph works how it should"){
     TwitterGraph g;
@@ -31,18 +30,22 @@ TEST_CASE("Checking of indices work"){
     g.addUser(28);
     g.addUser(35);
     bool case1 = true;
-    for(int i = 0; i<5; i++){
-        for(int j = i+1; j<5; j++){
-            if(g.indices[i] == g.indices[j])
+    for(int i = 1; i<6; i++){
+        for(int j = i+1; j<6; j++){
+            if(g.indices[7*i] == g.indices[7*j])
+                case1 = false;
+            if(g.indices[7*i]<0 || g.indices[7*i]>4)
                 case1 = false;
         }
     }
     REQUIRE(case1 == true);
     g.removeUser(7);
     bool case2 = true;
-    for(int i = 0; i<4; i++){
-        for(int j = i+1; j<4; j++){
-            if(g.indices[i] == g.indices[j])
+    for(int i = 2; i<6; i++){
+        for(int j = i+1; j<6; j++){
+            if(g.indices[7*i] == g.indices[7*j])
+                case2 = false;
+            if(g.indices[7*i]<0 || g.indices[7*i]>3)
                 case2 = false;
         }
     }
