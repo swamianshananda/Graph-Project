@@ -41,6 +41,7 @@ int** floyds(TwitterGraph& g){
         }
         i++;
         iti++;
+        
     }
 
     //Second set of loops 

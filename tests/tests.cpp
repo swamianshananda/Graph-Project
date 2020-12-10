@@ -31,22 +31,18 @@ TEST_CASE("Checking of indices work"){
     g.addUser(28);
     g.addUser(35);
     bool case1 = true;
-    for(int i = 1; i<6; i++){
-        for(int j = i+1; j<6; j++){
-            if(g.indices[7*i] == g.indices[7*j])
-                case1 = false;
-            if(g.indices[7*i]<0 || g.indices[7*i]>4)
+    for(int i = 0; i<5; i++){
+        for(int j = i+1; j<5; j++){
+            if(g.indices[i] == g.indices[j])
                 case1 = false;
         }
     }
     REQUIRE(case1 == true);
     g.removeUser(7);
     bool case2 = true;
-    for(int i = 2; i<6; i++){
-        for(int j = i+1; j<6; j++){
-            if(g.indices[7*i] == g.indices[7*j])
-                case2 = false;
-            if(g.indices[7*i]<0 || g.indices[7*i]>3)
+    for(int i = 0; i<4; i++){
+        for(int j = i+1; j<4; j++){
+            if(g.indices[i] == g.indices[j])
                 case2 = false;
         }
     }
@@ -122,4 +118,27 @@ TEST_CASE("Check if the Floyd-Warshall Algorithm Works"){
     REQUIRE(g.findDistance(4,2) == -1);
     REQUIRE(g.findDistance(5,4) == 1);
     REQUIRE(g.findDistance(5,2) == 2);
+}
+
+TEST_CASE("Check if the Betweeness Centriality Algorithm Works") {
+  TwitterGraph g;
+  for(int i = 1; i<6; i++){
+    g.addUser(i);
+  }
+  g.addConnection(1,2);
+  g.addConnection(2,3);
+  g.addConnection(2,4);
+  g.addConnection(4,5);
+  g.betweenessCentral(g);
+  REQUIRE(g.users[1]->betweenessCentralValue == 4);
+  REQUIRE(g.users[2]->betweenessCentralValue == 14);
+  REQUIRE(g.users[3]->betweenessCentralValue == 4);
+  REQUIRE(g.users[4]->betweenessCentralValue == 10);
+  REQUIRE(g.users[5]->betweenessCentralValue == 4);
+  g.addConnection(2,5);
+  REQUIRE(g.users[1]->betweenessCentralValue == 4);
+  REQUIRE(g.users[2]->betweenessCentralValue == 14);
+  REQUIRE(g.users[3]->betweenessCentralValue == 4);
+  REQUIRE(g.users[4]->betweenessCentralValue == 4);
+  REQUIRE(g.users[5]->betweenessCentralValue == 4);
 }

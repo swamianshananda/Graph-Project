@@ -1,6 +1,9 @@
 #include "TwitterGraph.h"
 #include <iostream>
 void TwitterGraph::addUser(unsigned long n){
+
+    
+
     if(users.find(n) == users.end()){
         int x = users.size();
         indices[n] = x;
@@ -8,8 +11,8 @@ void TwitterGraph::addUser(unsigned long n){
         users[n] = new User(n);
     }   //check is user in the hash table
          //if not, create a new user and add it to the hash table
-}
 
+}
 void TwitterGraph::removeUser(unsigned long n){
     if(users.find(n) != users.end()){   //check if the person is in the hash table
         for(auto it = (users[n]->adjList).begin(); it != (users[n]->adjList).end(); ++it){  //for every connection a person has
@@ -19,6 +22,7 @@ void TwitterGraph::removeUser(unsigned long n){
         users.erase(n); //erase the key from the hash table.
         createIndexes();
     }
+    
 }
 
 void TwitterGraph::addConnection(unsigned long s, unsigned long d){
@@ -124,7 +128,7 @@ void TwitterGraph::calculateDistances(){
                 distMatrix[x][y] = 0;
                 pathMatrix[x][y] = y;
             }
-            else if(isFollowing(it->first, it2->first)){
+            else if(isFollowing(indices[x], indices[y])){
                 distMatrix[x][y] = 1;
                 pathMatrix[x][y] = y;
             }
@@ -152,7 +156,19 @@ void TwitterGraph::calculateDistances(){
 }
 
 int TwitterGraph::findDistance(unsigned long n1, unsigned long n2){
-    int d = distMatrix[indices[n1]][indices[n2]];
+    //need index corresponding to userid
+    int indexNodeOne;
+    int indexNodeTwo;
+    for (auto it = indices.begin(); it != indices.end(); ++it) {
+      if (it->second == n1) {
+        indexNodeOne = it->first;
+      }
+      if (it->second == n2) {
+        indexNodeTwo = it->first;
+      }
+    }
+    
+    int d = distMatrix[indexNodeOne][indexNodeTwo];
     if(d == INT_MAX)
         return -1;
     return d;

@@ -4,21 +4,28 @@
 #include <unordered_map>
 #include <string>
 #include <queue>
+#include <stack>
+
+#define INF 9001
 
 using namespace std;
 
-void betweenessCentral(TwitterGraph &g, int** distanceArray) {
-  /*
+void betweenessCentral(TwitterGraph &g) {
+  
   stack<int> S;
   queue<int> Q;
-  vector<int> d;
+  
+  vector<int> pred;
+  vector<int> sigma;
+  vector<int> delta;
+  
   for (auto it = g.users.begin(); it != g.users.end(); ++it) {
     
-    unordered_map<int, unsigned long> P;
-    vector<int> sigma;
+    int dist[g.users.size()];
     
     
     
+    /*
     //enqueue s into Q
     
     while(!Q.empty()) {
@@ -48,10 +55,12 @@ void betweenessCentral(TwitterGraph &g, int** distanceArray) {
       S.pop();
       for 
     }
+     */
     
   }
-  */
-  
+     
+}  
+  /*
   float betweenessCentralValues [users.size()] = { }; // initialize array of all betweeness values to 0
   for(auto sourceNode : g.users) {
     int* sourceDistances = distanceArray[sourceNode]; //grab all relative distances from source node
@@ -71,8 +80,10 @@ void betweenessCentral(TwitterGraph &g, int** distanceArray) {
     node->second.betweenessCentralValue = betweenessCentralValues[count];
     count++;
   }
+  /*
 }
 
+/*
 int findLargestNumber(int* source) {
   int returnIndex = 0;
   for (int i = 1; i < source.size()-1; i++) {
@@ -97,3 +108,32 @@ void recursiveBetweenVal(int source, int current, int distance[], float &between
     }
   }
 }
+*/
+
+
+
+
+void betweenessCentral(TwitterGraph &g) {
+  for (auto sourceNode : g.users) {
+    for (auto destinationNode : g.users) {
+      if (sourceNode->first != destinationNode->first) {
+        vector<unsigned long> path = g.shortestPath(sourceNode->first, destinationNode->first);
+        if (path[0] != INF) {
+          for (auto nodeID : path) {
+            if (nodeID != sourceNode->first) {
+              g.users[nodeID]->betweenessCentralValue += 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
