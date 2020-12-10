@@ -53,6 +53,17 @@ TEST_CASE("Checking of indices work"){
 
 }
 
+TEST_CASE("Checking of inverse indices work"){
+    TwitterGraph g;
+    for(unsigned i = 1; i<11; i++){
+        g.addUser(i*13);
+    }
+    for(unsigned i = 1; i<11; i++){
+        REQUIRE(i*13 == g.inverse[g.indices[i*13]]);
+    }
+
+}
+
 TEST_CASE("Check if BFS works"){
     TwitterGraph g;
     for(int i = 1; i<6; i++){
