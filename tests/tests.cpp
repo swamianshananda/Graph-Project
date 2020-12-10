@@ -167,3 +167,32 @@ TEST_CASE("Check if the Betweeness Centriality Algorithm Works") {
   REQUIRE(g2.users[4]->betweenessCentralValue == 0);
   REQUIRE(g2.users[5]->betweenessCentralValue == 0);
 }
+
+TEST_CASE("Check if the Betweeness Centriality Algorithm Works with directed nodes acting as undirected graph") {
+  TwitterGraph g;
+  for(int i = 1; i<6; i++){
+    g.addUser(i);
+  }
+  g.addConnection(1,2);
+  g.addConnection(2,1);
+  g.addConnection(2,3);
+  g.addConnection(3,2);
+  g.addConnection(2,4);
+  g.addConnection(4,2);
+  g.addConnection(4,5);
+  g.addConnection(5,4);
+  g.calculateCentrality();
+  REQUIRE(g.users[1]->betweenessCentralValue == 4);
+  REQUIRE(g.users[2]->betweenessCentralValue == 14);
+  REQUIRE(g.users[3]->betweenessCentralValue == 4);
+  REQUIRE(g.users[4]->betweenessCentralValue == 10);
+  REQUIRE(g.users[5]->betweenessCentralValue == 4);
+  g.addConnection(2,5);
+  g.addConnection(5,2);
+  g.calculateCentrality();
+  REQUIRE(g.users[1]->betweenessCentralValue == 4);
+  REQUIRE(g.users[2]->betweenessCentralValue == 14);
+  REQUIRE(g.users[3]->betweenessCentralValue == 4);
+  REQUIRE(g.users[4]->betweenessCentralValue == 4);
+  REQUIRE(g.users[5]->betweenessCentralValue == 4);
+}

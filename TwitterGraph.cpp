@@ -162,7 +162,7 @@ void TwitterGraph::calculateCentrality(){
     unsigned v = users.size();
     for(unsigned x = 0; x<v; x++){
         for(unsigned y = 0; y<v; y++){
-           if(pathMatrix[x][y]!= (int) y && pathMatrix[x][y] != -1){
+           if(x != y && pathMatrix[x][y] != -1){
                (users[inverse[pathMatrix[x][y]]]->betweenessCentralValue)++;
            } 
         }
