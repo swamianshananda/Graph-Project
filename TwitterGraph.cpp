@@ -102,6 +102,7 @@ void TwitterGraph::createIndexes(){
     }
 }
 
+//floyd warshall algorithm
 void TwitterGraph::calculateDistances(){
     unsigned v = users.size();
     unsigned x;
@@ -158,6 +159,7 @@ int TwitterGraph::findDistance(unsigned long n1, unsigned long n2){
     return d;
 }
 
+//betweeness centriality algorithm
 void TwitterGraph::calculateCentrality(){
     unsigned v = users.size();
     if(v != pathMatrix.size()){
@@ -170,7 +172,7 @@ void TwitterGraph::calculateCentrality(){
     int temp;
     for(unsigned x = 0; x<v; x++){
         for(unsigned y = 0; y<v; y++){
-           if(pathMatrix[x][y] != -1 && x!=y){
+           if(pathMatrix[x][y] != -1 && x!=y) { //make sure not same node and that nodes have connection 
                i = x;
                temp = pathMatrix[i][y];
                for(int g = 0; g< distMatrix[x][y]-1; g++){
