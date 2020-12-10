@@ -129,16 +129,27 @@ TEST_CASE("Check if the Betweeness Centriality Algorithm Works") {
   g.addConnection(2,3);
   g.addConnection(2,4);
   g.addConnection(4,5);
-  g.betweenessCentral(g);
-  REQUIRE(g.users[1]->betweenessCentralValue == 4);
-  REQUIRE(g.users[2]->betweenessCentralValue == 14);
-  REQUIRE(g.users[3]->betweenessCentralValue == 4);
-  REQUIRE(g.users[4]->betweenessCentralValue == 10);
-  REQUIRE(g.users[5]->betweenessCentralValue == 4);
-  g.addConnection(2,5);
-  REQUIRE(g.users[1]->betweenessCentralValue == 4);
-  REQUIRE(g.users[2]->betweenessCentralValue == 14);
-  REQUIRE(g.users[3]->betweenessCentralValue == 4);
-  REQUIRE(g.users[4]->betweenessCentralValue == 4);
-  REQUIRE(g.users[5]->betweenessCentralValue == 4);
+  g.calculateDistances();
+  g.calculateCentrality();
+  REQUIRE(g.users[1]->betweenessCentralValue == 0);
+  REQUIRE(g.users[2]->betweenessCentralValue == 3);
+  REQUIRE(g.users[3]->betweenessCentralValue == 0);
+  REQUIRE(g.users[4]->betweenessCentralValue == 1);
+  REQUIRE(g.users[5]->betweenessCentralValue == 0);
+  TwitterGraph g2;
+  for(int i = 1; i<6; i++){
+    g2.addUser(i);
+  }
+  g2.addConnection(1,2);
+  g2.addConnection(2,3);
+  g2.addConnection(2,4);
+  g2.addConnection(4,5);
+  g2.addConnection(2,5);
+  g2.calculateDistances();
+  g2.calculateCentrality();
+  REQUIRE(g2.users[1]->betweenessCentralValue == 0);
+  REQUIRE(g2.users[2]->betweenessCentralValue == 3);
+  REQUIRE(g2.users[3]->betweenessCentralValue == 0);
+  REQUIRE(g2.users[4]->betweenessCentralValue == 0);
+  REQUIRE(g2.users[5]->betweenessCentralValue == 0);
 }
