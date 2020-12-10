@@ -40,7 +40,7 @@ Parser.o: Parser.h Parser.cpp
 
 
 test: output_msg tests.o TwitterGraph.o Parser.o 
-	$(LD) tests.o TwitterGraph.o Parser.o floyd-warshall.o $(LDFLAGS) -o test
+	$(LD) tests.o TwitterGraph.o Parser.o $(LDFLAGS) -o test
 
 tests.o : tests/tests.cpp catch/catch.hpp
 	$(CXX) $(CXXFLAGS) tests/tests.cpp

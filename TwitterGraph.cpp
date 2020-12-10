@@ -160,10 +160,25 @@ int TwitterGraph::findDistance(unsigned long n1, unsigned long n2){
 
 void TwitterGraph::calculateCentrality(){
     unsigned v = users.size();
+    if(v != pathMatrix.size()){
+        calculateDistances();
+    }
+    for(auto it = users.begin(); it!= users.end(); ++it){
+        it->second->betweenessCentralValue = 0;
+    }
+    unsigned i;
+    int temp;
     for(unsigned x = 0; x<v; x++){
         for(unsigned y = 0; y<v; y++){
-           if(x != y && pathMatrix[x][y] != -1){
-               (users[inverse[pathMatrix[x][y]]]->betweenessCentralValue)++;
+           if(pathMatrix[x][y] != -1 && x!=y){
+               i = x;
+               temp = pathMatrix[i][y];
+               for(int g = 0; g< distMatrix[x][y]-1; g++){
+                   (users[inverse[temp]]->betweenessCentralValue)++;
+                   i = temp;
+                   temp = pathMatrix[i][y];
+               }
+               (users[inverse[temp]]->betweenessCentralValue)++;
            } 
         }
     }
