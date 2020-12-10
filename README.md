@@ -24,7 +24,7 @@ The number in the left hand column is a user ID of type unsigned long. Then ther
 _HERE IS A LINK TO OUR DATASET_: http://snap.stanford.edu/data/ego-Twitter.html<br />
 *please note that we used the twitter_combined.txt.gz file and then switched/converted it to a txt file (by switching the file ending) where it listed out the connections as seen above. We did this because no computers/applications we had to could read the format, and we confirmed it with our TA Alex Shi who said it was good.
 
-
+<br />
 <br />
 We have provided test cases. Once downloaded please run "make test" then "./test" this will show you how our test cases work. Afterwards if you want to run the program fully run "make" then "./project". This is our executable where it runs the whole program and displays the BFS output in the file BFS.txt. It also runs the Floyd-Warshall and Betweeness Centriality and will print out the the distances between each node in distances.txt and the betweeness centriality values in centrality.txt
 
