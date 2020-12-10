@@ -7,22 +7,18 @@ using std::stoul;
 using std::getline;
 using std::vector;
 using std::ofstream;
-
+using std::stringstream;
 void readData(TwitterGraph& g, string filename){
     ifstream file(filename);
     string line;
-    string firstId;
-    string secondId;
-
+    stringstream ss;
     if (file.is_open()){
         while (getline(file,line) ){
-            int space = line.find(" ");
-            firstId = line.substr(0, space);
-            secondId = line.substr(space+1, line.length());
-            
+            unsigned long idOne;
+            unsigned long idTwo;
+            ss<<line;
+            ss>>idOne>>idTwo;
             //Now turning strings into unsigned long and creating User objects
-            unsigned long idOne = stoul(firstId);
-            unsigned long idTwo = stoul(secondId);
             g.addUser(idOne);
             g.addUser(idTwo);
             g.addConnection(idOne, idTwo);
@@ -44,4 +40,33 @@ void outputBFS(TwitterGraph& g, string filename){
         myfile<<"\n\n";
         i++;
     }
+    myfile.close();
+}
+
+void outputDistances(TwitterGraph& g, string filename){
+    g.calculateDistances();
+    int d;
+    ofstream myfile;
+    myfile.open(filename);
+    myfile<<"The following is a list of distances between two nodes in the graph with positive distance:\n\n";
+    for(auto it = g.users.begin(); it != g.users.end(); it++){
+        for(auto it2 = g.users.begin(); it2 != g.users.end(); it2++){
+            d = g.findDistance(it->first,it2->first);
+            if(d>0)
+                myfile<<it->first<<" -> "<<it2->first<<" : "<<d<<"\n";
+        }
+    }
+    myfile.close();
+}
+
+void outputC(TwitterGraph& g, std::string filename){
+    g.calculateCentrality();
+    ofstream myfile;
+    myfile.open(filename);
+    myfile<<"The following is a list of how central each of the nodes are in the graph:\n\n";
+    for(auto it = g.users.begin(); it != g.users.end(); it++){
+        
+        myfile<<it->first<<" : "<<it->second->betweenessCentralValue<<"\n";
+    }
+    myfile.close();
 }

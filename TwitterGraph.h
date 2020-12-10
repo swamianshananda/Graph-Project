@@ -17,13 +17,15 @@ class TwitterGraph{ //graph to use to map Twitter Users
             const unsigned long userId; //to represent the nodeId used in the files.
             std::unordered_map<unsigned long, Connection*> adjList; //used a hashtable to determine all the people a user follows
             Label l;
-            float betweenessCentralValue; //betweeness centriality value
-            User(unsigned long id) : userId(id), l(UNEXPLORED), betweenessCentralValue(0.0){};  //constructs user based on nodeId
+            int betweenessCentralValue; //betweeness centriality value
+            User(unsigned long id) : userId(id), l(UNEXPLORED), betweenessCentralValue(0){};  //constructs user based on nodeId
             
         };
         std::unordered_map<unsigned long, User*> users; //hash table to determine nodeId to actual users.
         std::unordered_map<unsigned long, int> indices;
+        std::unordered_map<int, unsigned long> inverse;
         std::vector<std::vector<int>> distMatrix;
+        std::vector<std::vector<int>> pathMatrix;
         
         void addUser(unsigned long);    //adds user to graph
         void removeUser(unsigned long); //removers user from graph.
@@ -37,5 +39,6 @@ class TwitterGraph{ //graph to use to map Twitter Users
         void createIndexes();
         void calculateDistances();
         int findDistance(unsigned long, unsigned long);
+        void calculateCentrality();
         ~TwitterGraph();
 };
