@@ -108,30 +108,30 @@ void TwitterGraph::calculateDistances(){
     unsigned x;
     unsigned y;
     distMatrix.resize(v);
-    pathMatrix.resize(v);
+    //pathMatrix.resize(v);
     for(std::vector<int>& n : distMatrix){
         n.resize(v);
     }
-    
+    /*
     for(std::vector<int>& n : pathMatrix){
         n.resize(v);
     }
-    
+    */
     for(auto it = users.begin(); it!= users.end(); ++it){
         for(auto it2 = users.begin(); it2 != users.end(); ++it2){
             x = indices[it->first];
             y = indices[it2->first];
             if(x == y){
                 distMatrix[x][y] = 0;
-                pathMatrix[x][y] = y;
+                //pathMatrix[x][y] = y;
             }
             else if(isFollowing(it->first, it2->first)){
                 distMatrix[x][y] = 1;
-                pathMatrix[x][y] = y;
+                //pathMatrix[x][y] = y;
             }
             else{
                 distMatrix[x][y] = INT_MAX;
-                pathMatrix[x][y] = -1;
+                //pathMatrix[x][y] = -1;
             }
         }
     }
@@ -145,7 +145,7 @@ void TwitterGraph::calculateDistances(){
                     continue;
                 if(distMatrix[x][y] > (distMatrix[x][k]+distMatrix[k][y])){
                     distMatrix[x][y] = distMatrix[x][k] + distMatrix[k][y];
-                    pathMatrix[x][y] = pathMatrix[x][k];
+                    //pathMatrix[x][y] = pathMatrix[x][k];
                 }
             }
         }
@@ -161,6 +161,7 @@ int TwitterGraph::findDistance(unsigned long n1, unsigned long n2){
 
 //betweeness centriality algorithm
 void TwitterGraph::calculateCentrality(){
+    /*
     unsigned v = users.size();
     if(v != pathMatrix.size()){
         calculateDistances();
@@ -184,6 +185,55 @@ void TwitterGraph::calculateCentrality(){
            } 
         }
     }
+    */
+    
+    unsigned len = users.size();
+    int v;
+    int w;
+    for(auto it = users.begin(); it!= users.end(); ++it){
+        it->second->betweenessCentralValue = 0;
+    }
+    for(int s = 0; s< (int) len; s++){
+        std::stack<int> S;
+        std::vector<std::vector<int>> P;
+        P.resize(len);
+        std::vector<double> sigma;
+        sigma.resize(len,0.0);
+        sigma[s] = 1.;
+        std::vector<int> d;
+        d.resize(len,-1);
+        d[s] = 0;
+        std::queue<int> Q;
+        Q.push(s);
+        while(!Q.empty()){
+            v = Q.front();
+            Q.pop();
+            S.push(v);
+            for(unsigned long wUser : connections(inverse[v])){
+                w = indices[wUser];
+                if(d[w]<0){
+                    Q.push(w);
+                    d[w] = d[v]+1;
+                }
+                if(d[w] == d[v]+1){
+                    sigma[w] = sigma[w]+sigma[v];
+                    P[w].push_back(v);
+                }
+            }
+        }
+        std::vector<double> delta;
+        delta.resize(len,0.);
+        while(!S.empty()){
+            w = S.top();
+            S.pop();
+            for(int v: P[w]){
+                delta[v] = delta[v] + (sigma[v]/sigma[w])*(1+delta[w]);       
+            }
+            if(w!=s)
+                (users[inverse[w]]->betweenessCentralValue)+=delta[w];
+        }
+    }
+    
 }
 
 TwitterGraph::~TwitterGraph(){
