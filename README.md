@@ -4,6 +4,8 @@ Link to presentation used in video https://docs.google.com/presentation/d/1zmGBX
 
 Link to Final Presentation Video https://illinois.zoom.us/rec/share/xGrq34MKg9K1rzH1sdj__gAmM26Jm44VG2e2hSQr1vq8zp9NmMB4f6VwVoWNb7ty.RNE8sqyqJoHo_mD8 
 
+(only avaibile for 30 days after 12DEC2020)
+
 
 
 # **INTRODUCTION** #
@@ -39,7 +41,9 @@ We have provided test cases. Once downloaded please run "make test" then "./test
 We calculated the Betweenness Centrality values as following: using a Brandes algorithm that allows us to perform a BFS search to figure out the shortest path, then marking all the nodes in the shortest path between a source node and every other node in the dataset. We repeated this by making every node in the dataset a source node.
 
 We used the pseudo code of a Brandes algorithm from this source
+
 https://www.cl.cam.ac.uk/teaching/1718/MLRD/handbook/brandes.html
+
 *we confirmed it was correct by testing with online examples, and this was the same method that the TA explained to us in office hours
 
 # **General Commands** #
