@@ -1,13 +1,18 @@
 # khattri2-anshcs2-tyxia2
 
+Link to presentation used in video https://docs.google.com/presentation/d/1zmGBXCm43ChIfUwAg9eAY0T8a443mNOmMLy1p3ydWZs/edit?usp=sharing
+
+Link to Final Presentation Video https://illinois.zoom.us/rec/share/xGrq34MKg9K1rzH1sdj__gAmM26Jm44VG2e2hSQr1vq8zp9NmMB4f6VwVoWNb7ty.RNE8sqyqJoHo_mD8 
+
+
 
 # **INTRODUCTION** #
 
-Hello!!! We are Ansh Shah, Neel Khattri, and Taylor Xia, and this is our cs225 final project. For our final project we are using a twitter sub data set, and are modeling it so that we have incoproated Floyd-Warshall's shortest path algorithim, and also a Betweeness Centriality calculation. 
+Hello!!! We are Ansh Shah, Neel Khattri, and Taylor Xia, and this is our cs225 final project. For our final project we are using a twitter sub data set, and are modeling it so that we have incoproated Floyd-Warshall's shortest path algorithim, and also a Betweenness Centrality calculation. 
 
 # **PURPOSE** #
 
-We are running the Floyd-Warshall algorithm to find the shortest number of connections between two nodes. This way two users can use the least amount of work to figure out how they knew each other. We are running a Betweeness Centriality calculation to show how "popular" or "connected" someone is based of their Betweeness Centriality value.
+We are running the Floyd-Warshall algorithm to find the shortest number of connections between two nodes. This way two users can use the least amount of work to figure out how they knew each other. We are running a Betweenness Centrality calculation to show how "popular" or "connected" someone is based of their Betweenness Centrality value.
 
 # **INSTRUCTIONS** #
 
@@ -26,13 +31,16 @@ HERE IS A LINK TO OUR DATASET *: http://snap.stanford.edu/data/ego-Twitter.html<
 
 <br />
 <br />
-We have provided test cases. Once downloaded please run "make test" then "./test" this will show you how our test cases work. Afterwards if you want to run the program fully run "make" then "./project". This is our executable where it runs the whole program and displays the BFS output in the file "BFS.txt". It also runs the Floyd-Warshall and Betweeness Centriality and will print out the the distances between each node in "distances.txt" and the betweeness centriality values in "centrality.txt".
+We have provided test cases. Once downloaded please run "make test" then "./test" this will show you how our test cases work. Afterwards if you want to run the program fully run "make" then "./project". This is our executable where it runs the whole program and displays the BFS output in the file "BFS.txt". It also runs the Floyd-Warshall and Betweenness Centrality and will print out the the distances between each node in "distances.txt" and the Betweenness Centrality values in "centrality.txt".
 
 <br />
 <br />
 
-We calculated the betweeness centriality values as following: we declare one node as a source, then we find the shortest path to every other node in the dataset. For each path, every node that is in the path will increment their betweeness centriality score by 1. Then we repeat this process by making every node in the data set a source node. If two node have no connection/path than the betweeness centriality doesn't increment. This leads us to be the more connections a node has, meaning it is more central like a "hub" the higher the betweeness centriality score will be. This concept was given to us by a TA.
+We calculated the Betweenness Centrality values as following: using a Brandes algorithm that allows us to perform a BFS search to figure out the shortest path, then marking all the nodes in the shortest path between a source node and every other node in the dataset. We repeated this by making every node in the dataset a source node.
 
+We used the pseudo code of a Brandes algorithm from this source
+https://www.cl.cam.ac.uk/teaching/1718/MLRD/handbook/brandes.html
+*we confirmed it was correct by testing with online examples, and this was the same method that the TA explained to us in office hours
 
 # **General Commands** #
 
@@ -46,3 +54,5 @@ We calculated the betweeness centriality values as following: we declare one nod
 
 **./test** = executable command in terminal...make test must be run before this
 make clean = removes all executables
+
+
